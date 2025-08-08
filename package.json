@@ -1,0 +1,31 @@
+{
+  "name": "e-commerce-product-listing",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel public/index.html --open",
+    "build": "parcel build public/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarimHegab698/E-Commerce-Product-Listing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarimHegab698/E-Commerce-Product-Listing/issues"
+  },
+  "homepage": "https://github.com/KarimHegab698/E-Commerce-Product-Listing#readme",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "parcel": "^2.15.4"
+  }
+}
