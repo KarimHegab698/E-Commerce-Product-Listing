@@ -678,7 +678,7 @@ try {
 var _react = _interopRequireDefault(require("379ec07e2eead772"));
 var _client = _interopRequireDefault(require("f4376371ff5080bf"));
 var _App = _interopRequireDefault(require("b168ff8b878dc68d"));
-require("74764855f278ec9c");
+require("3d8f230a43a9e890");
 function _interopRequireDefault(e) {
     return e && e.__esModule ? e : {
         "default": e
@@ -692,7 +692,7 @@ root.render(/*#__PURE__*/ _react["default"].createElement(_App["default"], null)
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"379ec07e2eead772":"jMk1U","f4376371ff5080bf":"hrvwu","b168ff8b878dc68d":"f8V2Q","74764855f278ec9c":"6n0o6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jMk1U":[function(require,module,exports,__globalThis) {
+},{"379ec07e2eead772":"jMk1U","f4376371ff5080bf":"hrvwu","b168ff8b878dc68d":"f8V2Q","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","3d8f230a43a9e890":"bhJkM"}],"jMk1U":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("a569817e6ea559f6");
 
@@ -15903,8 +15903,8 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("2ffd86778554c8ea"));
 var _ProductList = _interopRequireDefault(require("57679789446d37a6"));
-var _Filters = _interopRequireDefault(require("182901d06a50d3a2"));
-require("da08df227970cd84");
+var _ProductFilters = _interopRequireDefault(require("932f662de7920892"));
+require("eadc9b8957075157");
 function _interopRequireDefault(e) {
     return e && e.__esModule ? e : {
         "default": e
@@ -15969,57 +15969,58 @@ function _iterableToArrayLimit(r, l) {
 function _arrayWithHoles(r) {
     if (Array.isArray(r)) return r;
 }
-function App() {
-    var _useState = (0, _react.useState)([]), _useState2 = _slicedToArray(_useState, 2), products = _useState2[0], setProducts = _useState2[1];
-    var _useState3 = (0, _react.useState)([]), _useState4 = _slicedToArray(_useState3, 2), filteredProducts = _useState4[0], setFilteredProducts = _useState4[1];
-    var _useState5 = (0, _react.useState)(0), _useState6 = _slicedToArray(_useState5, 2), cartCount = _useState6[0], setCartCount = _useState6[1];
-    var _useState7 = (0, _react.useState)(true), _useState8 = _slicedToArray(_useState7, 2), loading = _useState8[0], setLoading = _useState8[1];
+function ShopApp() {
+    var _useState = (0, _react.useState)([]), _useState2 = _slicedToArray(_useState, 2), allProducts = _useState2[0], setAllProducts = _useState2[1];
+    var _useState3 = (0, _react.useState)([]), _useState4 = _slicedToArray(_useState3, 2), displayedProducts = _useState4[0], setDisplayedProducts = _useState4[1];
+    var _useState5 = (0, _react.useState)(0), _useState6 = _slicedToArray(_useState5, 2), cartItemCount = _useState6[0], setCartItemCount = _useState6[1];
+    var _useState7 = (0, _react.useState)(true), _useState8 = _slicedToArray(_useState7, 2), isLoading = _useState8[0], setIsLoading = _useState8[1];
     (0, _react.useEffect)(function() {
-        fetch("https://fakestoreapi.com/products").then(function(res) {
-            return res.json();
+        fetch("https://fakestoreapi.com/products").then(function(response) {
+            if (!response.ok) throw new Error("Failed to fetch products");
+            return response.json();
         }).then(function(data) {
-            setProducts(data);
-            setFilteredProducts(data);
-            setLoading(false);
+            setAllProducts(data);
+            setDisplayedProducts(data);
+            setIsLoading(false);
         })["catch"](function(err) {
-            console.error("Error fetching products:", err);
-            setLoading(false);
+            console.error("Whoops, couldn't load products:", err);
+            setIsLoading(false);
         });
     }, []);
-    var handleAddToCart = function handleAddToCart() {
-        setCartCount(function(prev) {
+    var addToCart = function addToCart() {
+        setCartItemCount(function(prev) {
             return prev + 1;
         });
     };
-    var handleFilterChange = (0, _react.useCallback)(function(newList) {
-        setFilteredProducts(newList);
+    var updateFilteredProducts = (0, _react.useCallback)(function(newList) {
+        setDisplayedProducts(newList);
     }, []);
     return /*#__PURE__*/ _react["default"].createElement("div", {
         className: "app-container"
     }, /*#__PURE__*/ _react["default"].createElement("header", {
         className: "app-header"
-    }, /*#__PURE__*/ _react["default"].createElement("h1", null, "Product Listing"), /*#__PURE__*/ _react["default"].createElement("div", {
+    }, /*#__PURE__*/ _react["default"].createElement("h1", null, "Product Shop"), /*#__PURE__*/ _react["default"].createElement("div", {
         className: "cart-count"
-    }, "\uD83D\uDED2 ", /*#__PURE__*/ _react["default"].createElement("span", null, cartCount))), /*#__PURE__*/ _react["default"].createElement(_Filters["default"], {
-        products: products,
-        onFilter: handleFilterChange
+    }, "\uD83D\uDED2 ", /*#__PURE__*/ _react["default"].createElement("span", null, cartItemCount, " ", cartItemCount === 1 ? "item" : "items"))), /*#__PURE__*/ _react["default"].createElement(_ProductFilters["default"], {
+        products: allProducts,
+        onFilterUpdate: updateFilteredProducts
     }), /*#__PURE__*/ _react["default"].createElement(_ProductList["default"], {
-        products: filteredProducts,
-        onAddToCart: handleAddToCart,
-        loading: loading
+        products: displayedProducts,
+        onAddToCart: addToCart,
+        loading: isLoading
     }));
 }
-_c = App;
-var _default = exports["default"] = App;
+_c = ShopApp;
+var _default = exports["default"] = ShopApp;
 var _c;
-$RefreshReg$(_c, "App");
+$RefreshReg$(_c, "ShopApp");
 
   $parcel$ReactRefreshHelpers$be2d.postlude(module);
 } finally {
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"2ffd86778554c8ea":"jMk1U","57679789446d37a6":"6lY4f","da08df227970cd84":"6n0o6","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","182901d06a50d3a2":"8WRJN"}],"6lY4f":[function(require,module,exports,__globalThis) {
+},{"2ffd86778554c8ea":"jMk1U","57679789446d37a6":"6lY4f","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","932f662de7920892":"5ajfn","eadc9b8957075157":"bhJkM"}],"6lY4f":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$e319 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$e319.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -16041,7 +16042,7 @@ function _interopRequireDefault(e) {
 }
 function ProductList(_ref) {
     var products = _ref.products, onAddToCart = _ref.onAddToCart, loading = _ref.loading;
-    if (loading) return /*#__PURE__*/ _react["default"].createElement("p", null, "Loading products...");
+    if (loading) return /*#__PURE__*/ _react["default"].createElement("p", null, "Hold On, Loading products...");
     if (products.length === 0) return /*#__PURE__*/ _react["default"].createElement("p", null, "No products found.");
     return /*#__PURE__*/ _react["default"].createElement("div", {
         className: "product-list"
@@ -18392,8 +18393,8 @@ function _interopRequireDefault(e) {
 }
 function ProductCard(_ref) {
     var product = _ref.product, onAddToCart = _ref.onAddToCart;
-    var handleViewDetails = function handleViewDetails() {
-        console.log("Product details:", product);
+    var viewProductDetails = function viewProductDetails() {
+        console.log("Checking out details for:", product);
     };
     return /*#__PURE__*/ _react["default"].createElement("div", {
         className: "product-card"
@@ -18405,7 +18406,7 @@ function ProductCard(_ref) {
         className: "product-title"
     }, product.title), /*#__PURE__*/ _react["default"].createElement("p", {
         className: "product-price"
-    }, "$", product.price), /*#__PURE__*/ _react["default"].createElement("p", {
+    }, "$", product.price.toFixed(2)), /*#__PURE__*/ _react["default"].createElement("p", {
         className: "product-category"
     }, product.category), /*#__PURE__*/ _react["default"].createElement("p", {
         className: "product-description"
@@ -18414,7 +18415,7 @@ function ProductCard(_ref) {
     }, /*#__PURE__*/ _react["default"].createElement("button", {
         onClick: onAddToCart
     }, "Add to Cart"), /*#__PURE__*/ _react["default"].createElement("button", {
-        onClick: handleViewDetails
+        onClick: viewProductDetails
     }, "View Details")));
 }
 _c = ProductCard;
@@ -18427,12 +18428,12 @@ $RefreshReg$(_c, "ProductCard");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"29bb1d43466b4777":"jMk1U","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6n0o6":[function() {},{}],"8WRJN":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$04ba = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-$parcel$ReactRefreshHelpers$04ba.init();
+},{"29bb1d43466b4777":"jMk1U","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"5ajfn":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$7a18 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$7a18.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
 var prevRefreshSig = globalThis.$RefreshSig$;
-$parcel$ReactRefreshHelpers$04ba.prelude(module);
+$parcel$ReactRefreshHelpers$7a18.prelude(module);
 
 try {
 "use strict";
@@ -18448,7 +18449,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports["default"] = void 0;
-var _react = _interopRequireWildcard(require("c41d3e3d1f03a0ce"));
+var _react = _interopRequireWildcard(require("f89b0fcdc609a050"));
 function _interopRequireWildcard(e, t) {
     if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap();
     return (_interopRequireWildcard = function _interopRequireWildcard(e, t) {
@@ -18520,93 +18521,107 @@ function _iterableToArrayLimit(r, l) {
 function _arrayWithHoles(r) {
     if (Array.isArray(r)) return r;
 }
-function Filters(_ref) {
-    var products = _ref.products, onFilter = _ref.onFilter;
-    var _useState = (0, _react.useState)(""), _useState2 = _slicedToArray(_useState, 2), search = _useState2[0], setSearch = _useState2[1];
+function ProductFilters(_ref) {
+    var products = _ref.products, onFilterUpdate = _ref.onFilterUpdate;
+    var _useState = (0, _react.useState)(""), _useState2 = _slicedToArray(_useState, 2), searchTerm = _useState2[0], setSearchTerm = _useState2[1];
     var _useState3 = (0, _react.useState)(""), _useState4 = _slicedToArray(_useState3, 2), minPrice = _useState4[0], setMinPrice = _useState4[1];
     var _useState5 = (0, _react.useState)(""), _useState6 = _slicedToArray(_useState5, 2), maxPrice = _useState6[0], setMaxPrice = _useState6[1];
-    var _useState7 = (0, _react.useState)(""), _useState8 = _slicedToArray(_useState7, 2), category = _useState8[0], setCategory = _useState8[1];
+    var _useState7 = (0, _react.useState)(""), _useState8 = _slicedToArray(_useState7, 2), selectedCategory = _useState8[0], setSelectedCategory = _useState8[1];
     var categories = [
         "All"
-    ].concat(_toConsumableArray(new Set(products.map(function(p) {
-        return p.category;
+    ].concat(_toConsumableArray(new Set(products.map(function(item) {
+        return item.category;
     }))));
     (0, _react.useEffect)(function() {
-        var filtered = products;
-        if (search) filtered = filtered.filter(function(p) {
-            return p.title.toLowerCase().includes(search.toLowerCase());
+        var filteredProducts = _toConsumableArray(products);
+        if (searchTerm) filteredProducts = filteredProducts.filter(function(item) {
+            return item.title.toLowerCase().includes(searchTerm.toLowerCase());
         });
-        if (category && category !== "All") filtered = filtered.filter(function(p) {
-            return p.category === category;
+        if (selectedCategory && selectedCategory !== "All") filteredProducts = filteredProducts.filter(function(item) {
+            return item.category === selectedCategory;
         });
-        if (minPrice) filtered = filtered.filter(function(p) {
-            return p.price >= parseFloat(minPrice);
+        if (minPrice) filteredProducts = filteredProducts.filter(function(item) {
+            return item.price >= parseFloat(minPrice);
         });
-        if (maxPrice) filtered = filtered.filter(function(p) {
-            return p.price <= parseFloat(maxPrice);
+        if (maxPrice) filteredProducts = filteredProducts.filter(function(item) {
+            return item.price <= parseFloat(maxPrice);
         });
-        onFilter(filtered);
+        onFilterUpdate(filteredProducts);
     }, [
-        search,
+        searchTerm,
         minPrice,
         maxPrice,
-        category,
+        selectedCategory,
         products,
-        onFilter
+        onFilterUpdate
     ]);
     return /*#__PURE__*/ _react["default"].createElement("div", {
         className: "filters"
     }, /*#__PURE__*/ _react["default"].createElement("div", {
         className: "filter-group"
-    }, /*#__PURE__*/ _react["default"].createElement("label", null, "Search"), /*#__PURE__*/ _react["default"].createElement("input", {
+    }, /*#__PURE__*/ _react["default"].createElement("label", {
+        htmlFor: "search"
+    }, "Search Products"), /*#__PURE__*/ _react["default"].createElement("input", {
+        id: "search",
         type: "text",
-        placeholder: "Search by name...",
-        value: search,
+        placeholder: "Product name...",
+        value: searchTerm,
         onChange: function onChange(e) {
-            return setSearch(e.target.value);
+            return setSearchTerm(e.target.value);
         }
     })), /*#__PURE__*/ _react["default"].createElement("div", {
         className: "filter-group"
-    }, /*#__PURE__*/ _react["default"].createElement("label", null, "Category"), /*#__PURE__*/ _react["default"].createElement("select", {
-        value: category,
+    }, /*#__PURE__*/ _react["default"].createElement("label", {
+        htmlFor: "category"
+    }, "Category"), /*#__PURE__*/ _react["default"].createElement("select", {
+        id: "category",
+        value: selectedCategory,
         onChange: function onChange(e) {
-            return setCategory(e.target.value);
+            return setSelectedCategory(e.target.value);
         }
-    }, categories.map(function(cat, idx) {
+    }, categories.map(function(cat, index) {
         return /*#__PURE__*/ _react["default"].createElement("option", {
-            key: idx,
+            key: index,
             value: cat
         }, cat);
     }))), /*#__PURE__*/ _react["default"].createElement("div", {
         className: "filter-group"
-    }, /*#__PURE__*/ _react["default"].createElement("label", null, "Min Price"), /*#__PURE__*/ _react["default"].createElement("input", {
+    }, /*#__PURE__*/ _react["default"].createElement("label", {
+        htmlFor: "min-price"
+    }, "Min Price"), /*#__PURE__*/ _react["default"].createElement("input", {
+        id: "min-price",
         type: "number",
-        placeholder: "Min",
+        placeholder: "0",
         value: minPrice,
         onChange: function onChange(e) {
             return setMinPrice(e.target.value);
-        }
+        },
+        min: "0"
     })), /*#__PURE__*/ _react["default"].createElement("div", {
         className: "filter-group"
-    }, /*#__PURE__*/ _react["default"].createElement("label", null, "Max Price"), /*#__PURE__*/ _react["default"].createElement("input", {
+    }, /*#__PURE__*/ _react["default"].createElement("label", {
+        htmlFor: "max-price"
+    }, "Max Price"), /*#__PURE__*/ _react["default"].createElement("input", {
+        id: "max-price",
         type: "number",
-        placeholder: "Max",
+        placeholder: "1000",
         value: maxPrice,
         onChange: function onChange(e) {
             return setMaxPrice(e.target.value);
-        }
+        },
+        min: "0"
     })));
 }
-_c = Filters;
-var _default = exports["default"] = Filters;
+_c = ProductFilters;
+var _default = exports["default"] = ProductFilters;
 var _c;
-$RefreshReg$(_c, "Filters");
+$RefreshReg$(_c, "ProductFilters");
 
-  $parcel$ReactRefreshHelpers$04ba.postlude(module);
+  $parcel$ReactRefreshHelpers$7a18.postlude(module);
 } finally {
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"c41d3e3d1f03a0ce":"jMk1U","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6n0o6":[function() {},{}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequirea5f2", {}, null, null, "http://localhost:1234")
+},{"f89b0fcdc609a050":"jMk1U","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"bhJkM":[function() {},{}],"bhJkM":[function() {},{}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequirea5f2", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=public.31b563d9.js.map

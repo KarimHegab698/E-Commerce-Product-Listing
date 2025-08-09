@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 function ProductList({ products, onAddToCart, loading }) {
   if (loading) {
-    return <p>Loading products...</p>;
+    return <p>Hold On, Loading products...</p>;
   }
 
   if (products.length === 0) {
