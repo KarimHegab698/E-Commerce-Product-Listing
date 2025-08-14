@@ -16001,7 +16001,7 @@ function ShopApp() {
         className: "app-header"
     }, /*#__PURE__*/ _react["default"].createElement("h1", null, "Product Shop"), /*#__PURE__*/ _react["default"].createElement("div", {
         className: "cart-count"
-    }, "\uD83D\uDED2 ", /*#__PURE__*/ _react["default"].createElement("span", null, cartItemCount, " ", cartItemCount === 1 ? "item" : "items"))), /*#__PURE__*/ _react["default"].createElement(_ProductFilters["default"], {
+    }, "\uD83D\uDED2", " ", /*#__PURE__*/ _react["default"].createElement("span", null, cartItemCount, " ", cartItemCount === 1 ? "item" : "items"))), /*#__PURE__*/ _react["default"].createElement(_ProductFilters["default"], {
         products: allProducts,
         onFilterUpdate: updateFilteredProducts
     }), /*#__PURE__*/ _react["default"].createElement(_ProductList["default"], {

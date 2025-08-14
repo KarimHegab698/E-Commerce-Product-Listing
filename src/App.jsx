@@ -39,11 +39,17 @@ function ShopApp() {
       <header className="app-header">
         <h1>Product Shop</h1>
         <div className="cart-count">
-          🛒 <span>{cartItemCount} {cartItemCount === 1 ? "item" : "items"}</span>
+          🛒{" "}
+          <span>
+            {cartItemCount} {cartItemCount === 1 ? "item" : "items"}
+          </span>
         </div>
       </header>
 
-      <ProductFilters products={allProducts} onFilterUpdate={updateFilteredProducts} />
+      <ProductFilters
+        products={allProducts}
+        onFilterUpdate={updateFilteredProducts}
+      />
 
       <ProductList
         products={displayedProducts}
